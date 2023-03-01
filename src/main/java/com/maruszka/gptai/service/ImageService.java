@@ -2,11 +2,12 @@ package com.maruszka.gptai.service;
 
 import com.maruszka.gptai.component.ImageConverter;
 import com.maruszka.gptai.model.image.Content;
-import com.maruszka.gptai.model.image.ImageResponse;
 import com.maruszka.gptai.model.image.ImagePayload;
+import com.maruszka.gptai.model.image.ImageResponse;
 import com.maruszka.gptai.model.image.ImageResponseFormat;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -19,11 +20,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ImageService {
 
+    @Value("${gpt.token}")
+    private String privateKey;
+
     private final RestTemplate restTemplate;
     private final ImageConverter imageConverter;
 
     private static final String AUTHORIZATION = "Authorization";
-    private static final String PRIVATE_KEY = SE_SWOJ_WSTAW;
+
     private static final String IMAGE_ENDPOINT = "https://api.openai.com/v1/images/generations";
 
     public void createImage(ImagePayload payload) {
@@ -32,7 +36,7 @@ public class ImageService {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        headers.add(AUTHORIZATION, "Bearer " + PRIVATE_KEY);
+        headers.add(AUTHORIZATION, "Bearer " + privateKey);
 
         ImageResponseFormat format = payload.getImageResponseFormat();
         HttpEntity<ImagePayload> entity = new HttpEntity<>(payload, headers);
