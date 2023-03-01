@@ -1,0 +1,10 @@
+server:
+  port: 8080
+
+springdoc:
+  swagger-ui:
+  path: /swagger-ui.html
+
+gpt:
+  output-directory: output/
+  extension: .png
