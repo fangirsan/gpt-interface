@@ -23,7 +23,7 @@ public class ImageService {
     private final ImageConverter imageConverter;
 
     private static final String AUTHORIZATION = "Authorization";
-    private static final String PRIVATE_KEY = "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";
+    private static final String PRIVATE_KEY = SE_SWOJ_WSTAW;
     private static final String IMAGE_ENDPOINT = "https://api.openai.com/v1/images/generations";
 
     public void createImage(ImagePayload payload) {
